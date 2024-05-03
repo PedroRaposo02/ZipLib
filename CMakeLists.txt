@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.29 FATAL_ERROR)
 
-project(ZipLib)
+project(ziplib)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -126,16 +126,16 @@ source_group("Sources/Streams" FILES ${sources_streams})
 source_group("Sources/Utils" FILES ${sources_utils})
 source_group("Sources" FILES ${sources})
 # library
-add_library(ZipLib STATIC
+add_library(ziplib STATIC
     ${sources_compression} ${sources_detail} ${sources_methods} ${sources_streams} ${sources_utils} ${sources}
 )
 # properties
-target_include_directories(ZipLib
+target_include_directories(ziplib
     PUBLIC
         .
         ${ZLIB_INCLUDE_DIR}
 )
-target_link_libraries(ZipLib
+target_link_libraries(ziplib
     PRIVATE
         bzip2
         lzma

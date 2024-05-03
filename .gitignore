@@ -32,6 +32,7 @@ obj/*
 *.suo
 *.sdf
 *.opensdf
+.vscode/
 
 # CMake
 out/*

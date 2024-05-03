@@ -1,12 +1,8 @@
 #pragma once
 
-#ifdef _WIN32
-#include "../../../extlibs/lzma/Types.h"
-#endif
+#ifndef ZIPLIB_NO_LZMA
 
-#ifdef __linux__
-#include "../../../extlibs/lzma/unix/Types.h"
-#endif
+#include "../../../extlibs/lzma/Types.h"
 
 namespace detail
 {
@@ -50,3 +46,5 @@ namespace detail
       size_t _bytesWritten;
   };
 }
+
+#endif // ZIPLIB_NO_LZMA

@@ -244,7 +244,7 @@ void ZipArchiveEntry::SetAttributes(Attributes value)
   Attributes newVal = prevVal | value;
 
   // if we're changing from directory to file
-  if (!!(prevVal & Attributes::Directory) && !!(newVal & Attributes::Archive))
+  if (!!(prevVal & Attributes::Directory) && !!(value & Attributes::Archive))
   {
     newVal &= ~Attributes::Directory;
 
@@ -255,7 +255,7 @@ void ZipArchiveEntry::SetAttributes(Attributes value)
   }
 
   // if we're changing from file to directory
-  else if (!!(prevVal & Attributes::Archive) && !!(newVal & Attributes::Directory))
+  else if (!!(prevVal & Attributes::Archive) && !!(value & Attributes::Directory))
   {
     newVal &= ~Attributes::Archive;
 
@@ -522,14 +522,16 @@ void ZipArchiveEntry::SetVersionMadeBy(uint16_t value)
   _centralDirectoryFileHeader.VersionMadeBy = value;
 }
 
-int32_t ZipArchiveEntry::GetOffsetOfLocalHeader() const
+// [Cecil] int32_t -> uint32_t
+uint32_t ZipArchiveEntry::GetOffsetOfLocalHeader() const
 {
   return _centralDirectoryFileHeader.RelativeOffsetOfLocalHeader;
 }
 
-void ZipArchiveEntry::SetOffsetOfLocalHeader(int32_t value)
+// [Cecil] int32_t -> uint32_t
+void ZipArchiveEntry::SetOffsetOfLocalHeader(uint32_t value)
 {
-  _centralDirectoryFileHeader.RelativeOffsetOfLocalHeader = static_cast<int32_t>(value);
+  _centralDirectoryFileHeader.RelativeOffsetOfLocalHeader = value;
 }
 
 bool ZipArchiveEntry::HasCompressionStream() const

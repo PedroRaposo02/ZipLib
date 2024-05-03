@@ -3,17 +3,9 @@
 
 #include "detail/lzma_handle.h"
 
-#ifdef _WIN32
+#ifndef ZIPLIB_NO_LZMA
+
 #include "../../extlibs/lzma/LzmaEnc.h"
-#endif
-
-#ifdef __linux__
-#include "../../extlibs/lzma/unix/LzmaEnc.h"
-#endif
-
-#ifdef __APPLE__
-#include "../../extlibs/lzma/unix/LzmaEnc.h"
-#endif
 
 struct lzma_encoder_properties
   : compression_encoder_properties_interface
@@ -49,3 +41,5 @@ struct lzma_encoder_properties
   bool IsMultithreaded;
   int  CompressionLevel;
 };
+
+#endif // ZIPLIB_NO_LZMA

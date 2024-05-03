@@ -5,8 +5,6 @@
 #include <fstream>
 #include <cassert>
 #include <stdexcept>
-#include <filesystem>
-namespace fs = std::filesystem;
 
 namespace
 {
@@ -33,20 +31,21 @@ namespace
 ZipArchive::Ptr ZipFile::Open(const std::string& zipPath)
 {
   std::ifstream* zipFile = new std::ifstream();
-  zipFile->open(fs::u8path(zipPath), std::ios::binary);
+  zipFile->open(zipPath, std::ios::binary);
 
   if (!zipFile->is_open())
   {
     // if file does not exist, try to create it
     std::ofstream tmpFile;
-    tmpFile.open(fs::u8path(zipPath), std::ios::binary);
+    tmpFile.open(zipPath, std::ios::binary);
     tmpFile.close();
 
-    zipFile->open(fs::u8path(zipPath), std::ios::binary);
+    zipFile->open(zipPath, std::ios::binary);
 
     // if attempt to create file failed, throw an exception
     if (!zipFile->is_open())
     {
+      delete zipFile; // [Cecil] Don't leave in the memory
       throw std::runtime_error("cannot open zip file");
     }
   }

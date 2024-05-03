@@ -5,6 +5,8 @@
 
 #include <memory>
 
+#ifndef ZIPLIB_NO_BZIP2
+
 class Bzip2Method :
   public ICompressionMethod
 {
@@ -16,6 +18,8 @@ class Bzip2Method :
       /* CompressionMethod */ 12,
       /* VersionNeededToExtract */ 46
     );
+
+    ZIP_METHOD_CLASS_CONSTRUCTOR(Bzip2Method, bzip2_encoder, bzip2_decoder);
 
     enum class BlockSize : int
     {
@@ -44,3 +48,5 @@ class Bzip2Method :
     bzip2_encoder_properties _encoderProps;
     bzip2_decoder_properties _decoderProps;
 };
+
+#endif // ZIPLIB_NO_BZIP2

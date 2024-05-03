@@ -5,6 +5,8 @@
 
 #include <memory>
 
+#ifndef ZIPLIB_NO_LZMA
+
 class LzmaMethod :
   public ICompressionMethod
 {
@@ -16,6 +18,8 @@ class LzmaMethod :
       /* CompressionMethod */ 14,
       /* VersionNeededToExtract */ 63
     );
+
+    ZIP_METHOD_CLASS_CONSTRUCTOR(LzmaMethod, lzma_encoder, lzma_decoder);
 
     enum class CompressionLevel : int
     {
@@ -44,3 +48,5 @@ class LzmaMethod :
     lzma_encoder_properties _encoderProps;
     lzma_decoder_properties _decoderProps;
 };
+
+#endif // ZIPLIB_NO_LZMA

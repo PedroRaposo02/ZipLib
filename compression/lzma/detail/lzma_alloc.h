@@ -1,16 +1,8 @@
 #pragma once
 
-#ifdef _WIN32
+#ifndef ZIPLIB_NO_LZMA
+
 #include "../../../extlibs/lzma/Types.h"
-#endif
-
-#ifdef __linux__
-#include "../../../extlibs/lzma/unix/Types.h"
-#endif
-
-#ifdef __APPLE__
-#include "../../../extlibs/lzma/unix/Types.h"
-#endif
 
 namespace detail
 {
@@ -25,3 +17,5 @@ namespace detail
       }
   };
 }
+
+#endif // ZIPLIB_NO_LZMA

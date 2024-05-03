@@ -3,6 +3,8 @@
 
 #include <algorithm>
 
+#ifndef ZIPLIB_NO_ZLIB
+
 struct deflate_encoder_properties
   : compression_encoder_properties_interface
 {
@@ -21,3 +23,5 @@ struct deflate_encoder_properties
   size_t BufferCapacity;
   int    CompressionLevel;
 };
+
+#endif // ZIPLIB_NO_ZLIB

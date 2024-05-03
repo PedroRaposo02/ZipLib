@@ -2,20 +2,10 @@
 #include "lzma_handle.h"
 #include "lzma_out_stream.h"
 
-#ifdef _WIN32
+#ifndef ZIPLIB_NO_LZMA
+
 #include "../../../extlibs/lzma/7zVersion.h"
 #include "../../../extlibs/lzma/LzmaEnc.h"
-#endif
-
-#ifdef __linux__
-#include "../../../extlibs/lzma/unix/7zVersion.h"
-#include "../../../extlibs/lzma/unix/LzmaEnc.h"
-#endif
-
-#ifdef __APPLE__
-#include "../../../extlibs/lzma/unix/7zVersion.h"
-#include "../../../extlibs/lzma/unix/LzmaEnc.h"
-#endif
 
 namespace detail
 {
@@ -51,3 +41,5 @@ namespace detail
       Byte _header[HEADER_SIZE];
   };
 }
+
+#endif // ZIPLIB_NO_LZMA

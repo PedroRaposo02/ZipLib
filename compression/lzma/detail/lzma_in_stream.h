@@ -1,15 +1,11 @@
 #pragma once
 
-#ifdef _WIN32
-#include "../../../extlibs/lzma/Types.h"
-#endif
-
-#ifdef __linux__
-#include "../../../extlibs/lzma/unix/Types.h"
-#endif
-
 #include <condition_variable>
 #include <mutex>
+
+#ifndef ZIPLIB_NO_LZMA
+
+#include "../../../extlibs/lzma/Types.h"
 
 // forward declaration
 template <typename ELEM_TYPE_, typename TRAITS_TYPE_>
@@ -110,3 +106,5 @@ namespace detail
       }
   };
 }
+
+#endif // ZIPLIB_NO_LZMA
